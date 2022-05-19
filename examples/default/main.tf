@@ -1,6 +1,6 @@
 module "vault_rabbitmq" {
   source         = "../../"
-  username       = "user"
-  password       = "password"
-  connection_uri = "http://rabbitmq:5672"
+  username       = "guest"
+  password       = "guest"
+  connection_uri = "http://rabbitmq:15672"
 }
