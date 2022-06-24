@@ -25,14 +25,14 @@ jobs:
         env:
           VAULT_DEV_ROOT_TOKEN_ID: "simple"
         ports:
-          - 8200:8201
+          - 8200:8200
       rabbitmq:
         image: rabbitmq:3-management
         ports:
           - 15672
     steps:
       - name: checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: terraform init
         uses: robertdebock/terraform-action@1.1.2
         with:
@@ -62,3 +62,6 @@ jobs:
         env:
           TF_CLI_ARGS: "-input=false -auto-approve"
         if: ${{ always() }}
+      - name: check container logs
+        run: 'docker logs $(docker ps -aql)'
+        if: ${{ failure() }}
